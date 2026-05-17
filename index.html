@@ -805,6 +805,13 @@
       .giant-heart {
         cursor: auto;
       }
+
+      .exit-btn {
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 14px;
+        font-size: 20px;
+      }
     }
   </style>
 </head>
@@ -866,7 +873,7 @@
             <div class="vibe-list">
               <div class="vibe-item"><span>Umur Baru</span><span>21 Tahun 🎂</span></div>
               <div class="vibe-item"><span>Cantik</span><span>Level Maksimal ✨</span></div>
-              <div class="vibe-item"><span>Cengeng</span><span>Boleh dikit aja 🥺</span></div>
+              <div class="vibe-item"><span>Masa Depan</span><span>Sukses Karir & Kuliah 🚀</span></div>
             </div>
           </div>
           <div class="promise-card">
@@ -887,7 +894,7 @@
         <div class="reasons">
           <div class="reason hidden-reason">Baik Banget: Selalu peduli sama orang-orang di sekitarmu. 🥰</div>
           <div class="reason hidden-reason">Selalu Berusaha: Nggak gampang nyerah walau kadang jalannya susah. 💪</div>
-          <div class="reason hidden-reason">Cantik & Cengeng: Perpaduan yang bikin kamu unik dan ngangenin. 😆</div>
+          <div class="reason hidden-reason">Penuh Pesona: Tiap hari makin cantik dan selalu bikin bangga. ✨</div>
         </div>
       </div>
     </div>
@@ -1158,7 +1165,7 @@
         const p3 = document.getElementById('slide3-text3');
         
         typeGeneric(p1, "Selamat ulang tahun yang ke-21, Alya Dijayanti. Udah makin dewasa nih! Hari ini bukan cuma tentang umur kamu yang nambah, tapi tentang mensyukuri segala hal baik yang ada di diri kamu.", 30, () => {
-          typeGeneric(p2, "Kamu itu orangnya baik banget, cantik, dan aku salut banget sama kamu yang selalu berusaha ngasih yang terbaik di segala hal. Walaupun kadang kamu masih suka cengeng, nggak apa-apa kok, itu tandanya kamu punya hati yang lembut.", 30, () => {
+          typeGeneric(p2, "Kamu itu orangnya baik banget, cantik, dan aku salut banget sama kamu yang selalu berusaha ngasih yang terbaik. Semoga kuliahnya dilancarkan, semua cita-citanya tercapai, karirnya sukses, dan pastinya semakin cantik selalu.", 30, () => {
             typeGeneric(p3, "Di umur 21 ini, aku berdoa semoga semua yang kamu usahakan berbuah manis, selalu sehat, selalu dilindungi, dan kebahagiaan selalu nemenin langkah kamu. Terus jadi Yaya yang hebat ya. Aku bakal selalu dukung kamu.", 30, () => {
               const reasons = document.querySelectorAll('.hidden-reason');
               reasons.forEach((r, idx) => {
@@ -1213,7 +1220,7 @@
     }
 
     // Typing effect for Slide 1
-    const kalimatUtama = "Selamat ulang tahun yang ke-21! Semoga Yaya yang baik, cantik, selalu berusaha, dan kadang cengeng ini selalu dikelilingi kebahagiaan.";
+    const kalimatUtama = "Selamat ulang tahun yang ke-21! Semoga Yaya yang baik, selalu berusaha, dan semakin cantik ini selalu dikelilingi kebahagiaan dan kesuksesan.";
     let charIndex = 0;
     const typingText = document.getElementById("typingText");
 
