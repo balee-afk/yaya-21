@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -35,8 +36,10 @@
       user-select: none;
       -webkit-user-select: none;
     }
-    
-    a, button, .giant-heart {
+
+    a,
+    button,
+    .giant-heart {
       cursor: none;
     }
 
@@ -65,7 +68,8 @@
     /* Aurora Cursor Trail */
     .aurora-trail {
       position: fixed;
-      top: 0; left: 0;
+      top: 0;
+      left: 0;
       width: 50px;
       height: 50px;
       border-radius: 50%;
@@ -79,7 +83,8 @@
 
     .cursor-dot {
       position: fixed;
-      top: 0; left: 0;
+      top: 0;
+      left: 0;
       width: 8px;
       height: 8px;
       background: white;
@@ -95,32 +100,37 @@
       position: fixed;
       inset: 0;
       background: #0f0208;
-      z-index: 20000;
+      z-index: 9000;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
       transition: opacity 0.8s, visibility 0.8s;
     }
+
     .intro-overlay.hidden {
       opacity: 0;
       visibility: hidden;
     }
+
     .intro-content {
       padding: 30px;
       max-width: 400px;
     }
+
     .intro-content h2 {
       font-size: 32px;
       color: var(--soft-pink);
       margin-bottom: 12px;
     }
+
     .intro-content p {
-      color: rgba(255,255,255,0.8);
+      color: rgba(255, 255, 255, 0.8);
       margin-bottom: 30px;
       font-size: 16px;
       line-height: 1.6;
     }
+
     .intro-btn {
       background: linear-gradient(135deg, #ff4d8d, #d81b60);
       color: #fff;
@@ -133,6 +143,7 @@
       transition: all 0.3s ease;
       cursor: none;
     }
+
     .intro-btn:hover {
       transform: translateY(-3px) scale(1.05);
       box-shadow: 0 15px 35px rgba(255, 77, 141, 0.6);
@@ -152,22 +163,26 @@
       align-items: center;
       gap: 15px;
       z-index: 1000;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     }
+
     .music-info {
       display: flex;
       flex-direction: column;
       text-align: right;
     }
+
     .music-title {
       font-size: 14px;
       font-weight: 800;
       color: #fff;
     }
+
     .music-artist {
       font-size: 12px;
       color: var(--soft-pink);
     }
+
     .play-btn {
       width: 40px;
       height: 40px;
@@ -183,6 +198,7 @@
       box-shadow: 0 0 15px rgba(255, 77, 141, 0.4);
       transition: transform 0.2s;
     }
+
     .play-btn:hover {
       transform: scale(1.1);
     }
@@ -197,8 +213,10 @@
 
     .slide {
       position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -271,7 +289,7 @@
     .typing {
       font-size: clamp(16px, 2vw, 22px);
       line-height: 1.6;
-      color: rgba(255,255,255,.9);
+      color: rgba(255, 255, 255, .9);
       font-weight: 500;
     }
 
@@ -290,22 +308,22 @@
       height: 300px;
       overflow: hidden;
       border-radius: 28px;
-      background: 
-        linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(0,0,0,0.8)),
+      background:
+        linear-gradient(to bottom, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.8)),
         url('photo.jpg') center/cover no-repeat,
         linear-gradient(135deg, #ff4d8d, #1a0512);
       border: 1px solid var(--border);
       display: flex;
       align-items: flex-end;
       padding: 22px;
-      box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
       margin-bottom: 20px;
     }
 
     .photo-caption {
       padding: 9px 15px;
       border-radius: 999px;
-      background: rgba(255,77,141,.2);
+      background: rgba(255, 77, 141, .2);
       border: 1px solid var(--border);
       font-size: 14px;
       font-weight: 800;
@@ -325,10 +343,11 @@
       }
     }
 
-    .vibe-card, .promise-card {
+    .vibe-card,
+    .promise-card {
       border-radius: 26px;
       padding: 20px;
-      background: rgba(0,0,0,0.2);
+      background: rgba(0, 0, 0, 0.2);
       border: 1px solid var(--border);
     }
 
@@ -352,14 +371,14 @@
       gap: 12px;
       padding: 12px 14px;
       border-radius: 18px;
-      background: rgba(255,77,141,.1);
+      background: rgba(255, 77, 141, .1);
       color: #fff;
       font-size: 14px;
       font-weight: 700;
     }
 
     .promise-card p {
-      color: rgba(255,255,255,.85);
+      color: rgba(255, 255, 255, .85);
       line-height: 1.7;
       font-size: 15px;
     }
@@ -371,7 +390,7 @@
     }
 
     .letter p {
-      color: rgba(255,255,255,.9);
+      color: rgba(255, 255, 255, .9);
       line-height: 1.8;
       font-size: 16px;
       margin-bottom: 14px;
@@ -387,7 +406,7 @@
     .reason {
       padding: 16px;
       border-radius: 22px;
-      background: rgba(255,77,141,.1);
+      background: rgba(255, 77, 141, .1);
       border: 1px solid var(--border);
       color: #fff;
       line-height: 1.5;
@@ -416,11 +435,27 @@
     }
 
     @keyframes giantHeartbeat {
-      0%, 100% { transform: scale(1); }
-      15% { transform: scale(1.15); }
-      30% { transform: scale(1); }
-      45% { transform: scale(1.15); }
-      75% { transform: scale(1); }
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      15% {
+        transform: scale(1.15);
+      }
+
+      30% {
+        transform: scale(1);
+      }
+
+      45% {
+        transform: scale(1.15);
+      }
+
+      75% {
+        transform: scale(1);
+      }
     }
 
     .giant-heart-text {
@@ -430,9 +465,9 @@
       color: #fff;
       text-align: center;
       line-height: 1.4;
-      text-shadow: 0 0 20px rgba(255,77,141,0.5);
+      text-shadow: 0 0 20px rgba(255, 77, 141, 0.5);
     }
-    
+
     .giant-heart-subtext {
       margin-top: 12px;
       font-size: 16px;
@@ -465,7 +500,7 @@
       transform: translateY(-3px) scale(1.05);
       box-shadow: 0 15px 35px rgba(255, 77, 141, 0.6);
     }
-    
+
     .next-btn:active {
       transform: translateY(0) scale(0.98);
     }
@@ -520,7 +555,7 @@
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background: rgba(255,77,141,0.3);
+      background: rgba(255, 77, 141, 0.3);
       transition: all 0.3s ease;
     }
 
@@ -555,39 +590,94 @@
     }
 
     @keyframes blink {
-      0%, 45% { opacity: 1; }
-      46%, 100% { opacity: 0; }
+
+      0%,
+      45% {
+        opacity: 1;
+      }
+
+      46%,
+      100% {
+        opacity: 0;
+      }
     }
 
     @keyframes floatUp {
-      0% { transform: translateY(0) rotate(0deg) scale(0.8); opacity: 0; }
-      10% { opacity: 1; transform: translateY(-10vh) rotate(5deg) scale(1); }
-      90% { opacity: 1; }
-      100% { transform: translateY(-115vh) rotate(-15deg) scale(1.2); opacity: 0; }
+      0% {
+        transform: translateY(0) rotate(0deg) scale(0.8);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 1;
+        transform: translateY(-10vh) rotate(5deg) scale(1);
+      }
+
+      90% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(-115vh) rotate(-15deg) scale(1.2);
+        opacity: 0;
+      }
     }
 
     @keyframes confettiFall {
-      to { transform: translateY(115vh) rotate(720deg); opacity: 0; }
+      to {
+        transform: translateY(115vh) rotate(720deg);
+        opacity: 0;
+      }
     }
 
     @media (max-width: 768px) {
-      .next-btn, .prev-btn {
+
+      .next-btn,
+      .prev-btn {
         bottom: 20px;
         padding: 12px 20px;
         font-size: 14px;
       }
-      .next-btn { right: 20px; }
-      .prev-btn { left: 20px; }
-      .slide-indicator { bottom: 30px; }
-      .card { padding: 24px; }
-      .music-player { top: 15px; right: 15px; padding: 10px; transform: scale(0.9); transform-origin: top right; }
-      
+
+      .next-btn {
+        right: 20px;
+      }
+
+      .prev-btn {
+        left: 20px;
+      }
+
+      .slide-indicator {
+        bottom: 30px;
+      }
+
+      .card {
+        padding: 24px;
+      }
+
+      .music-player {
+        top: 15px;
+        right: 15px;
+        padding: 10px;
+        transform: scale(0.9);
+        transform-origin: top right;
+      }
+
       /* disable custom cursor on mobile */
-      .cursor-dot { display: none; }
-      body, a, button, .giant-heart { cursor: auto; }
+      .cursor-dot {
+        display: none;
+      }
+
+      body,
+      a,
+      button,
+      .giant-heart {
+        cursor: auto;
+      }
     }
   </style>
 </head>
+
 <body>
   <div class="noise"></div>
 
@@ -610,7 +700,7 @@
       <source src="so-high-school.mp3" type="audio/mpeg">
     </audio>
   </div>
-  
+
   <div class="cursor-dot" id="cursorDot"></div>
 
   <div class="slides-container" id="slidesContainer">
@@ -646,7 +736,8 @@
           <div class="promise-card">
             <div class="section-title">doa kecil buat yaya</div>
             <p>
-              Semoga Yaya yang selalu berusaha, yang super baik dan cantik ini, selalu dikelilingi hal-hal baik. Jangan gampang nyerah ya!
+              Semoga Yaya yang selalu berusaha, yang super baik dan cantik ini, selalu dikelilingi hal-hal baik. Jangan
+              gampang nyerah ya!
             </p>
           </div>
         </div>
@@ -658,13 +749,17 @@
       <div class="card letter">
         <h2>Untuk Yaya,</h2>
         <p>
-          Selamat ulang tahun yang ke-21, Alya Dijayanti. Udah makin dewasa nih! Hari ini bukan cuma tentang umur kamu yang nambah, tapi tentang mensyukuri segala hal baik yang ada di diri kamu.
+          Selamat ulang tahun yang ke-21, Alya Dijayanti. Udah makin dewasa nih! Hari ini bukan cuma tentang umur kamu
+          yang nambah, tapi tentang mensyukuri segala hal baik yang ada di diri kamu.
         </p>
         <p>
-          Kamu itu orangnya baik banget, cantik, dan aku salut banget sama kamu yang selalu berusaha ngasih yang terbaik di segala hal. Walaupun kadang kamu masih suka cengeng, nggak apa-apa kok, itu tandanya kamu punya hati yang lembut.
+          Kamu itu orangnya baik banget, cantik, dan aku salut banget sama kamu yang selalu berusaha ngasih yang terbaik
+          di segala hal. Walaupun kadang kamu masih suka cengeng, nggak apa-apa kok, itu tandanya kamu punya hati yang
+          lembut.
         </p>
         <p>
-          Di umur 21 ini, aku berdoa semoga semua yang kamu usahakan berbuah manis, selalu sehat, selalu dilindungi, dan kebahagiaan selalu nemenin langkah kamu. Terus jadi Yaya yang hebat ya. Aku bakal selalu dukung kamu.
+          Di umur 21 ini, aku berdoa semoga semua yang kamu usahakan berbuah manis, selalu sehat, selalu dilindungi, dan
+          kebahagiaan selalu nemenin langkah kamu. Terus jadi Yaya yang hebat ya. Aku bakal selalu dukung kamu.
         </p>
         <div class="reasons">
           <div class="reason">Baik Banget: Selalu peduli sama orang-orang di sekitarmu.</div>
@@ -678,8 +773,8 @@
     <div class="slide" id="slide-3">
       <div class="giant-heart-wrapper">
         <div class="giant-heart" onclick="sendMoreLove()">❤️</div>
-        <div class="giant-heart-text">Aku Sayang Banget Sama Yaya!</div>
-        <div class="giant-heart-subtext">Happy 21st Birthday Sayang 🥰 (Klik hatinya!)</div>
+        <div class="giant-heart-text">Wofyuuuuuu!</div>
+        <div class="giant-heart-subtext">Happy 21st Birthday Buwpiii 🥰 (Klik hatinya!)</div>
       </div>
     </div>
   </div>
@@ -697,10 +792,10 @@
   <script>
     // Cursor effect
     const cursorDot = document.getElementById('cursorDot');
-    
+
     let mouseX = window.innerWidth / 2;
     let mouseY = window.innerHeight / 2;
-    
+
     document.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
@@ -731,15 +826,15 @@
 
           trail.element.style.left = trail.x + 'px';
           trail.element.style.top = trail.y + 'px';
-          
+
           const ratio = index / trailCount;
           const scale = 1 - (ratio * 0.6);
           trail.element.style.transform = `translate(-50%, -50%) scale(${scale})`;
-          
+
           let r = 255 - ratio * (255 - 162);
           let g = 77 - ratio * (77 - 58);
           let b = 141 - ratio * (141 - 237);
-          trail.element.style.background = `rgba(${r}, ${g}, ${b}, ${0.8 - ratio*0.6})`;
+          trail.element.style.background = `rgba(${r}, ${g}, ${b}, ${0.8 - ratio * 0.6})`;
 
           x = trail.x;
           y = trail.y;
@@ -781,7 +876,7 @@
 
       // Hide overlay
       document.getElementById('introOverlay').classList.add('hidden');
-      
+
       // Start typing effect
       setTimeout(typeWriter, 500);
     }
@@ -877,7 +972,7 @@
           setTimeout(() => item.remove(), 6000);
         }, i * 100);
       }
-      
+
       const heart = document.querySelector('.giant-heart');
       heart.style.animationDuration = '0.5s';
       setTimeout(() => {
@@ -896,7 +991,7 @@
         confetti.style.animationDuration = Math.random() * 2 + 2.5 + "s";
         confetti.style.width = Math.random() * 8 + 6 + "px";
         confetti.style.height = Math.random() * 12 + 10 + "px";
-        
+
         document.body.appendChild(confetti);
         setTimeout(() => confetti.remove(), 5200);
       }
@@ -919,4 +1014,5 @@
     }, 800);
   </script>
 </body>
+
 </html>
