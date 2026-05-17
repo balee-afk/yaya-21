@@ -565,6 +565,27 @@
       box-shadow: 0 0 10px var(--pink);
     }
 
+    .hidden-reason {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .hidden-reason.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .typing-cursor {
+      display: inline-block;
+      width: 3px;
+      height: 1.1em;
+      background: var(--pink);
+      margin-left: 4px;
+      vertical-align: -3px;
+      animation: blink .8s infinite;
+    }
+
     .float {
       position: fixed;
       bottom: -40px;
@@ -735,10 +756,7 @@
           </div>
           <div class="promise-card">
             <div class="section-title">doa kecil buat yaya</div>
-            <p>
-              Semoga Yaya yang selalu berusaha, yang super baik dan cantik ini, selalu dikelilingi hal-hal baik. Jangan
-              gampang nyerah ya!
-            </p>
+            <p id="slide2-text" style="min-height: 80px;"></p>
           </div>
         </div>
       </div>
@@ -748,23 +766,13 @@
     <div class="slide" id="slide-2">
       <div class="card letter">
         <h2>Untuk Yaya,</h2>
-        <p>
-          Selamat ulang tahun yang ke-21, Alya Dijayanti. Udah makin dewasa nih! Hari ini bukan cuma tentang umur kamu
-          yang nambah, tapi tentang mensyukuri segala hal baik yang ada di diri kamu.
-        </p>
-        <p>
-          Kamu itu orangnya baik banget, cantik, dan aku salut banget sama kamu yang selalu berusaha ngasih yang terbaik
-          di segala hal. Walaupun kadang kamu masih suka cengeng, nggak apa-apa kok, itu tandanya kamu punya hati yang
-          lembut.
-        </p>
-        <p>
-          Di umur 21 ini, aku berdoa semoga semua yang kamu usahakan berbuah manis, selalu sehat, selalu dilindungi, dan
-          kebahagiaan selalu nemenin langkah kamu. Terus jadi Yaya yang hebat ya. Aku bakal selalu dukung kamu.
-        </p>
+        <p id="slide3-text1" style="min-height: 85px;"></p>
+        <p id="slide3-text2" style="min-height: 110px;"></p>
+        <p id="slide3-text3" style="min-height: 85px;"></p>
         <div class="reasons">
-          <div class="reason">Baik Banget: Selalu peduli sama orang-orang di sekitarmu.</div>
-          <div class="reason">Selalu Berusaha: Nggak gampang nyerah walau kadang jalannya susah.</div>
-          <div class="reason">Cantik & Cengeng: Perpaduan yang bikin kamu unik dan ngangenin. 😆</div>
+          <div class="reason hidden-reason">Baik Banget: Selalu peduli sama orang-orang di sekitarmu. 🥰</div>
+          <div class="reason hidden-reason">Selalu Berusaha: Nggak gampang nyerah walau kadang jalannya susah. 💪</div>
+          <div class="reason hidden-reason">Cantik & Cengeng: Perpaduan yang bikin kamu unik dan ngangenin. 😆</div>
         </div>
       </div>
     </div>
@@ -900,6 +908,31 @@
     const nextBtn = document.getElementById('nextBtn');
     const dots = document.querySelectorAll('.indicator-dot');
 
+    let hasTypedSlide2 = false;
+    let hasTypedSlide3 = false;
+
+    function typeGeneric(element, text, speed, onComplete) {
+      element.textContent = '';
+      let i = 0;
+      const cursor = document.createElement('span');
+      cursor.className = 'typing-cursor';
+      element.appendChild(cursor);
+      
+      function typeNext() {
+        if (i < text.length) {
+          cursor.remove();
+          element.textContent += text.charAt(i);
+          element.appendChild(cursor);
+          i++;
+          setTimeout(typeNext, speed);
+        } else {
+          cursor.remove();
+          if (onComplete) onComplete();
+        }
+      }
+      typeNext();
+    }
+
     function updateSlides() {
       slides.forEach((slide, i) => {
         if (i === currentSlide) {
@@ -912,6 +945,30 @@
       dots.forEach((dot, i) => {
         dot.classList.toggle('active', i === currentSlide);
       });
+
+      if (currentSlide === 1 && !hasTypedSlide2) {
+        hasTypedSlide2 = true;
+        const p = document.getElementById('slide2-text');
+        typeGeneric(p, "Semoga Yaya yang selalu berusaha, yang super baik dan cantik ini, selalu dikelilingi hal-hal baik. Jangan gampang nyerah ya!", 35);
+      }
+      
+      if (currentSlide === 2 && !hasTypedSlide3) {
+        hasTypedSlide3 = true;
+        const p1 = document.getElementById('slide3-text1');
+        const p2 = document.getElementById('slide3-text2');
+        const p3 = document.getElementById('slide3-text3');
+        
+        typeGeneric(p1, "Selamat ulang tahun yang ke-21, Alya Dijayanti. Udah makin dewasa nih! Hari ini bukan cuma tentang umur kamu yang nambah, tapi tentang mensyukuri segala hal baik yang ada di diri kamu.", 30, () => {
+          typeGeneric(p2, "Kamu itu orangnya baik banget, cantik, dan aku salut banget sama kamu yang selalu berusaha ngasih yang terbaik di segala hal. Walaupun kadang kamu masih suka cengeng, nggak apa-apa kok, itu tandanya kamu punya hati yang lembut.", 30, () => {
+            typeGeneric(p3, "Di umur 21 ini, aku berdoa semoga semua yang kamu usahakan berbuah manis, selalu sehat, selalu dilindungi, dan kebahagiaan selalu nemenin langkah kamu. Terus jadi Yaya yang hebat ya. Aku bakal selalu dukung kamu.", 30, () => {
+              const reasons = document.querySelectorAll('.hidden-reason');
+              reasons.forEach((r, idx) => {
+                setTimeout(() => r.classList.add('show'), idx * 500);
+              });
+            });
+          });
+        });
+      }
 
       if (currentSlide === 0) {
         prevBtn.classList.add('hidden');
