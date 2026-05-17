@@ -149,6 +149,23 @@
       box-shadow: 0 15px 35px rgba(255, 77, 141, 0.6);
     }
 
+    .intro-btn.hidden {
+      display: none;
+    }
+
+    .spinner {
+      width: 24px;
+      height: 24px;
+      border: 3px solid rgba(255, 77, 141, 0.3);
+      border-top-color: var(--pink);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
     /* Music Player */
     .music-player {
       position: fixed;
@@ -799,7 +816,13 @@
     <div class="intro-content">
       <h2>Hai Yaya! ✨</h2>
       <p>Biar pengalamannya lebih seru dan auto-play lagunya berfungsi, kita lihat versi layar penuh ya!</p>
-      <button class="intro-btn" onclick="startExperience()">Mulai & Fullscreen</button>
+      
+      <div id="loadingIndicator" style="margin-top: 20px; font-weight: 500; color: var(--soft-pink); display: flex; align-items: center; justify-content: center; gap: 10px;">
+        <span>Sedang menyiapkan memori dan lagu...</span>
+        <div class="spinner"></div>
+      </div>
+      
+      <button class="intro-btn hidden" id="startBtn" onclick="startExperience()">Mulai & Fullscreen</button>
     </div>
   </div>
 
@@ -809,7 +832,7 @@
       <div class="music-artist">Taylor Swift</div>
     </div>
     <button id="playPauseBtn" class="play-btn">▶</button>
-    <audio id="bgMusic" loop>
+    <audio id="bgMusic" loop preload="auto">
       <source src="Taylor Swift -  So High School (Official Lyric Video) (128).mp3" type="audio/mpeg">
     </audio>
   </div>
@@ -914,6 +937,23 @@
   </div>
 
   <script>
+    // Media Preloader
+    document.addEventListener('DOMContentLoaded', () => {
+      const bgMusic = document.getElementById('bgMusic');
+      const loadingInd = document.getElementById('loadingIndicator');
+      const startBtn = document.getElementById('startBtn');
+
+      function hideLoading() {
+        if (loadingInd) loadingInd.style.display = 'none';
+        if (startBtn) startBtn.classList.remove('hidden');
+      }
+
+      bgMusic.addEventListener('canplaythrough', hideLoading);
+      if (bgMusic.readyState >= 3) hideLoading();
+      window.addEventListener('load', hideLoading);
+      setTimeout(hideLoading, 8000); // Ultimate fallback
+    });
+
     // Cursor effect
     const cursorDot = document.getElementById('cursorDot');
 
