@@ -570,7 +570,7 @@
       flex-wrap: wrap;
       gap: 15px;
       justify-content: center;
-      max-height: 45vh;
+      max-height: 55vh;
       overflow-y: auto;
       padding: 20px 10px;
     }
@@ -589,20 +589,32 @@
       border-radius: 6px;
       box-shadow: 0 10px 20px rgba(0,0,0,0.3);
       transform: rotate(calc(var(--r) * 1deg));
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease, opacity 0.5s ease;
       cursor: none;
       position: relative;
     }
     
+    .hidden-polaroid {
+      opacity: 0;
+      transform: translateY(40px) scale(0.8) rotate(calc(var(--r) * 1deg));
+      pointer-events: none;
+    }
+    
+    .hidden-polaroid.show {
+      opacity: 1;
+      transform: translateY(0) scale(1) rotate(calc(var(--r) * 1deg));
+      pointer-events: auto;
+    }
+
     .polaroid:hover {
-      transform: scale(1.15) rotate(0deg);
+      transform: scale(1.15) rotate(0deg) !important;
       z-index: 10;
       box-shadow: 0 15px 35px rgba(255, 77, 141, 0.4);
     }
     
     .polaroid img {
-      width: 120px;
-      height: 120px;
+      width: 150px;
+      height: 150px;
       object-fit: cover;
       border-radius: 4px;
       pointer-events: none;
@@ -610,11 +622,11 @@
     
     @media (max-width: 600px) {
       .polaroid img {
-        width: 80px;
-        height: 80px;
+        width: 100px;
+        height: 100px;
       }
       .polaroid {
-        padding: 6px 6px 20px 6px;
+        padding: 8px 8px 24px 8px;
       }
     }
 
@@ -835,17 +847,17 @@
         <h2 style="color: var(--soft-pink); margin-bottom: 10px; font-size: clamp(24px, 4vw, 38px);">Memori Yaya ✨</h2>
         <p style="margin-bottom: 25px; color: rgba(255, 255, 255, .85); line-height: 1.6;">Koleksi foto-foto cantik kamu yang ngangenin...</p>
         <div class="gallery-grid">
-          <div class="polaroid" style="--r: -5;"><img src="photo.jpg"></div>
-          <div class="polaroid" style="--r: 3;"><img src="photo-1.jpeg"></div>
-          <div class="polaroid" style="--r: -2;"><img src="photo-2.jpeg"></div>
-          <div class="polaroid" style="--r: 6;"><img src="photo-3.jpeg"></div>
-          <div class="polaroid" style="--r: -4;"><img src="photo-4.jpeg"></div>
-          <div class="polaroid" style="--r: 2;"><img src="photo-5.jpeg"></div>
-          <div class="polaroid" style="--r: -6;"><img src="photo-6.jpeg"></div>
-          <div class="polaroid" style="--r: 4;"><img src="photo-7.jpeg"></div>
-          <div class="polaroid" style="--r: -3;"><img src="photo-8.jpeg"></div>
-          <div class="polaroid" style="--r: 5;"><img src="photo-9.jpeg"></div>
-          <div class="polaroid" style="--r: -1;"><img src="photo-10.jpeg"></div>
+          <div class="polaroid hidden-polaroid" style="--r: -5;"><img src="photo.jpg"></div>
+          <div class="polaroid hidden-polaroid" style="--r: 3;"><img src="photo-1.jpeg"></div>
+          <div class="polaroid hidden-polaroid" style="--r: -2;"><img src="photo-2.jpeg"></div>
+          <div class="polaroid hidden-polaroid" style="--r: 6;"><img src="photo-3.jpeg"></div>
+          <div class="polaroid hidden-polaroid" style="--r: -4;"><img src="photo-4.jpeg"></div>
+          <div class="polaroid hidden-polaroid" style="--r: 2;"><img src="photo-5.jpeg"></div>
+          <div class="polaroid hidden-polaroid" style="--r: -6;"><img src="photo-6.jpeg"></div>
+          <div class="polaroid hidden-polaroid" style="--r: 4;"><img src="photo-7.jpeg"></div>
+          <div class="polaroid hidden-polaroid" style="--r: -3;"><img src="photo-8.jpeg"></div>
+          <div class="polaroid hidden-polaroid" style="--r: 5;"><img src="photo-9.jpeg"></div>
+          <div class="polaroid hidden-polaroid" style="--r: -1;"><img src="photo-10.jpeg"></div>
         </div>
       </div>
     </div>
@@ -986,6 +998,8 @@
     let isTypingSlide2 = false;
     let hasTypedSlide3 = false;
     let isTypingSlide3 = false;
+    let hasShownPhotos = false;
+    let isShowingPhotos = false;
 
     function typeGeneric(element, text, speed, onComplete) {
       element.textContent = '';
@@ -1017,6 +1031,9 @@
         prevBtn.classList.add('hidden');
         nextBtn.classList.add('hidden');
       } else if (currentSlide === 2 && isTypingSlide3) {
+        prevBtn.classList.add('hidden');
+        nextBtn.classList.add('hidden');
+      } else if (currentSlide === 3 && isShowingPhotos) {
         prevBtn.classList.add('hidden');
         nextBtn.classList.add('hidden');
       } else if (currentSlide === totalSlides - 1) {
@@ -1073,6 +1090,21 @@
               });
             });
           });
+        });
+      }
+      if (currentSlide === 3 && !hasShownPhotos) {
+        hasShownPhotos = true;
+        isShowingPhotos = true;
+        updateButtonVisibility();
+        const polaroids = document.querySelectorAll('.polaroid.hidden-polaroid');
+        polaroids.forEach((p, idx) => {
+          setTimeout(() => {
+            p.classList.add('show');
+            if (idx === polaroids.length - 1) {
+              isShowingPhotos = false;
+              updateButtonVisibility();
+            }
+          }, idx * 300);
         });
       }
 
