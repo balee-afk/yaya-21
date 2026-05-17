@@ -630,22 +630,32 @@
       }
     }
 
-    .exit-fullscreen-btn {
-      margin-top: 30px;
-      padding: 10px 24px;
-      background: rgba(255, 255, 255, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.5);
+    .exit-btn {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      z-index: 100;
+      background: rgba(255, 77, 141, 0.1);
+      border: 1px solid var(--border);
       color: #fff;
-      border-radius: 20px;
-      cursor: none;
-      font-size: 16px;
-      font-family: inherit;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-size: 24px;
+      backdrop-filter: blur(10px);
       transition: all 0.3s ease;
-      backdrop-filter: blur(5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: none;
     }
-    .exit-fullscreen-btn:hover {
-      background: rgba(255, 255, 255, 0.4);
-      transform: scale(1.05);
+    .exit-btn:hover {
+      background: rgba(255, 77, 141, 0.2);
+      transform: translateY(-3px) scale(1.05);
+    }
+    .exit-btn.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(20px);
     }
 
     .hidden-reason {
@@ -886,13 +896,14 @@
         <div class="giant-heart" onclick="sendMoreLove()">❤️</div>
         <div class="giant-heart-text">Wofyuuuuuu!</div>
         <div class="giant-heart-subtext">Happy 21st Birthday Buwpiii 🥰 (Klik hatinya!)</div>
-        <button class="exit-fullscreen-btn" onclick="exitFullscreen()">Keluar Mode Layar Penuh</button>
+
       </div>
     </div>
   </div>
 
   <button class="prev-btn hidden" id="prevBtn" onclick="prevSlide()">⟵ Back</button>
   <button class="next-btn" id="nextBtn" onclick="nextSlide()">Next ⟶</button>
+  <button class="exit-btn hidden" id="exitBtn" onclick="exitFullscreen()" title="Keluar Mode Layar Penuh">🚪</button>
 
   <div class="slide-indicator" id="indicators">
     <div class="indicator-dot active"></div>
@@ -1011,6 +1022,7 @@
     const slides = document.querySelectorAll('.slide');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
+    const exitBtn = document.getElementById('exitBtn');
     const dots = document.querySelectorAll('.indicator-dot');
 
     let isTypingSlide1 = true;
@@ -1046,6 +1058,7 @@
     function updateButtonVisibility() {
       if (currentSlide === 0) {
         prevBtn.classList.add('hidden');
+        exitBtn.classList.add('hidden');
         if (isTypingSlide1) {
           nextBtn.classList.add('hidden');
         } else {
@@ -1054,18 +1067,23 @@
       } else if (currentSlide === 1 && isTypingSlide2) {
         prevBtn.classList.add('hidden');
         nextBtn.classList.add('hidden');
+        exitBtn.classList.add('hidden');
       } else if (currentSlide === 2 && isTypingSlide3) {
         prevBtn.classList.add('hidden');
         nextBtn.classList.add('hidden');
+        exitBtn.classList.add('hidden');
       } else if (currentSlide === 3 && isShowingPhotos) {
         prevBtn.classList.add('hidden');
         nextBtn.classList.add('hidden');
+        exitBtn.classList.add('hidden');
       } else if (currentSlide === totalSlides - 1) {
         prevBtn.classList.remove('hidden');
         nextBtn.classList.add('hidden');
+        exitBtn.classList.remove('hidden');
       } else {
         prevBtn.classList.remove('hidden');
         nextBtn.classList.remove('hidden');
+        exitBtn.classList.add('hidden');
       }
     }
 
