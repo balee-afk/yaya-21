@@ -915,18 +915,18 @@
 
       if (currentSlide === 0) {
         prevBtn.classList.add('hidden');
-      } else {
+        nextBtn.classList.add('hidden');
+      } else if (currentSlide === totalSlides - 1) {
         prevBtn.classList.remove('hidden');
-      }
-
-      if (currentSlide === totalSlides - 1) {
         nextBtn.classList.add('hidden');
         // Auto trigger confetti when reaching last slide
         makeConfetti(100);
       } else {
+        prevBtn.classList.remove('hidden');
         nextBtn.classList.remove('hidden');
       }
     }
+    updateSlides();
 
     function nextSlide() {
       if (currentSlide < totalSlides - 1) {
@@ -952,6 +952,12 @@
         typingText.textContent += kalimatUtama.charAt(charIndex);
         charIndex++;
         setTimeout(typeWriter, 50);
+      } else {
+        setTimeout(() => {
+          if (currentSlide === 0) {
+            nextSlide();
+          }
+        }, 5000);
       }
     }
 
