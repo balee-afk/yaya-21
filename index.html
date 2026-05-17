@@ -32,6 +32,8 @@
         radial-gradient(circle at 80% 80%, rgba(255, 77, 141, 0.15), transparent 40%),
         linear-gradient(135deg, #0f0208, #1a0512 45%, #0a0105);
       cursor: none; /* Hide default cursor to show our light clearly */
+      user-select: none; /* Prevent selection bug on click */
+      -webkit-user-select: none;
     }
     
     /* Add a fallback for elements that might need normal cursor */
@@ -581,12 +583,26 @@
     const cursorLight = document.getElementById('cursorLight');
     const cursorDot = document.getElementById('cursorDot');
     
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let lightX = mouseX;
+    let lightY = mouseY;
+    
     document.addEventListener('mousemove', (e) => {
-      cursorLight.style.left = e.clientX + 'px';
-      cursorLight.style.top = e.clientY + 'px';
-      cursorDot.style.left = e.clientX + 'px';
-      cursorDot.style.top = e.clientY + 'px';
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursorDot.style.left = mouseX + 'px';
+      cursorDot.style.top = mouseY + 'px';
     });
+
+    function animateCursor() {
+      lightX += (mouseX - lightX) * 0.15;
+      lightY += (mouseY - lightY) * 0.15;
+      cursorLight.style.left = lightX + 'px';
+      cursorLight.style.top = lightY + 'px';
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
 
     // Add hover effect to interactive elements
     const interactives = document.querySelectorAll('button, .giant-heart');
