@@ -630,6 +630,24 @@
       }
     }
 
+    .exit-fullscreen-btn {
+      margin-top: 30px;
+      padding: 10px 24px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      color: #fff;
+      border-radius: 20px;
+      cursor: none;
+      font-size: 16px;
+      font-family: inherit;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+    }
+    .exit-fullscreen-btn:hover {
+      background: rgba(255, 255, 255, 0.4);
+      transform: scale(1.05);
+    }
+
     .hidden-reason {
       opacity: 0;
       transform: translateY(20px);
@@ -868,6 +886,7 @@
         <div class="giant-heart" onclick="sendMoreLove()">❤️</div>
         <div class="giant-heart-text">Wofyuuuuuu!</div>
         <div class="giant-heart-subtext">Happy 21st Birthday Buwpiii 🥰 (Klik hatinya!)</div>
+        <button class="exit-fullscreen-btn" onclick="exitFullscreen()">Keluar Mode Layar Penuh</button>
       </div>
     </div>
   </div>
@@ -1174,6 +1193,16 @@
       setTimeout(() => {
         heart.style.animationDuration = '1.4s';
       }, 2000);
+    }
+
+    function exitFullscreen() {
+      if (document.fullscreenElement || document.webkitFullscreenElement) {
+        if (document.exitFullscreen) {
+          document.exitFullscreen().catch(e => console.log(e));
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        }
+      }
     }
 
     function makeConfetti(total) {
