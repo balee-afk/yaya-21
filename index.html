@@ -994,6 +994,7 @@
     const nextBtn = document.getElementById('nextBtn');
     const dots = document.querySelectorAll('.indicator-dot');
 
+    let isTypingSlide1 = true;
     let hasTypedSlide2 = false;
     let isTypingSlide2 = false;
     let hasTypedSlide3 = false;
@@ -1026,7 +1027,11 @@
     function updateButtonVisibility() {
       if (currentSlide === 0) {
         prevBtn.classList.add('hidden');
-        nextBtn.classList.add('hidden');
+        if (isTypingSlide1) {
+          nextBtn.classList.add('hidden');
+        } else {
+          nextBtn.classList.remove('hidden');
+        }
       } else if (currentSlide === 1 && isTypingSlide2) {
         prevBtn.classList.add('hidden');
         nextBtn.classList.add('hidden');
@@ -1141,11 +1146,8 @@
         charIndex++;
         setTimeout(typeWriter, 50);
       } else {
-        setTimeout(() => {
-          if (currentSlide === 0) {
-            nextSlide();
-          }
-        }, 5000);
+        isTypingSlide1 = false;
+        updateButtonVisibility();
       }
     }
 
