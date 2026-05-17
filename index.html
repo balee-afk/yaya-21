@@ -909,7 +909,9 @@
     const dots = document.querySelectorAll('.indicator-dot');
 
     let hasTypedSlide2 = false;
+    let isTypingSlide2 = false;
     let hasTypedSlide3 = false;
+    let isTypingSlide3 = false;
 
     function typeGeneric(element, text, speed, onComplete) {
       element.textContent = '';
@@ -933,6 +935,25 @@
       typeNext();
     }
 
+    function updateButtonVisibility() {
+      if (currentSlide === 0) {
+        prevBtn.classList.add('hidden');
+        nextBtn.classList.add('hidden');
+      } else if (currentSlide === 1 && isTypingSlide2) {
+        prevBtn.classList.add('hidden');
+        nextBtn.classList.add('hidden');
+      } else if (currentSlide === 2 && isTypingSlide3) {
+        prevBtn.classList.add('hidden');
+        nextBtn.classList.add('hidden');
+      } else if (currentSlide === totalSlides - 1) {
+        prevBtn.classList.remove('hidden');
+        nextBtn.classList.add('hidden');
+      } else {
+        prevBtn.classList.remove('hidden');
+        nextBtn.classList.remove('hidden');
+      }
+    }
+
     function updateSlides() {
       slides.forEach((slide, i) => {
         if (i === currentSlide) {
@@ -948,12 +969,17 @@
 
       if (currentSlide === 1 && !hasTypedSlide2) {
         hasTypedSlide2 = true;
+        isTypingSlide2 = true;
         const p = document.getElementById('slide2-text');
-        typeGeneric(p, "Semoga Yaya yang selalu berusaha, yang super baik dan cantik ini, selalu dikelilingi hal-hal baik. Jangan gampang nyerah ya!", 35);
+        typeGeneric(p, "Semoga Yaya yang selalu berusaha, yang super baik dan cantik ini, selalu dikelilingi hal-hal baik. Jangan gampang nyerah ya!", 35, () => {
+          isTypingSlide2 = false;
+          updateButtonVisibility();
+        });
       }
       
       if (currentSlide === 2 && !hasTypedSlide3) {
         hasTypedSlide3 = true;
+        isTypingSlide3 = true;
         const p1 = document.getElementById('slide3-text1');
         const p2 = document.getElementById('slide3-text2');
         const p3 = document.getElementById('slide3-text3');
@@ -963,25 +989,24 @@
             typeGeneric(p3, "Di umur 21 ini, aku berdoa semoga semua yang kamu usahakan berbuah manis, selalu sehat, selalu dilindungi, dan kebahagiaan selalu nemenin langkah kamu. Terus jadi Yaya yang hebat ya. Aku bakal selalu dukung kamu.", 30, () => {
               const reasons = document.querySelectorAll('.hidden-reason');
               reasons.forEach((r, idx) => {
-                setTimeout(() => r.classList.add('show'), idx * 500);
+                setTimeout(() => {
+                  r.classList.add('show');
+                  if (idx === reasons.length - 1) {
+                    isTypingSlide3 = false;
+                    updateButtonVisibility();
+                  }
+                }, idx * 500);
               });
             });
           });
         });
       }
 
-      if (currentSlide === 0) {
-        prevBtn.classList.add('hidden');
-        nextBtn.classList.add('hidden');
-      } else if (currentSlide === totalSlides - 1) {
-        prevBtn.classList.remove('hidden');
-        nextBtn.classList.add('hidden');
-        // Auto trigger confetti when reaching last slide
+      if (currentSlide === totalSlides - 1) {
         makeConfetti(100);
-      } else {
-        prevBtn.classList.remove('hidden');
-        nextBtn.classList.remove('hidden');
       }
+
+      updateButtonVisibility();
     }
     updateSlides();
 
