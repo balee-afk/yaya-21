@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy 21st Birthday, Yaya!</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', Arial, sans-serif;
+    }
+
+    :root {
+      --pink: #ff4d8d;
+      --soft-pink: #ffb3d1;
+      --purple: #7c3aed;
+      --dark: #12071f;
+      --glass: rgba(255, 255, 255, 0.14);
+      --border: rgba(255, 255, 255, 0.26);
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: #fff;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255, 77, 141, 0.38), transparent 32%),
+        radial-gradient(circle at 80% 10%, rgba(124, 58, 237, 0.45), transparent 35%),
+        radial-gradient(circle at 50% 90%, rgba(255, 179, 209, 0.25), transparent 42%),
+        linear-gradient(135deg, #12071f, #2a0f3d 45%, #16051f);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size: 42px 42px;
+      pointer-events: none;
+      mask-image: linear-gradient(to bottom, black, transparent 85%);
+    }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .12;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
+      z-index: 0;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 18px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 1040px;
+      position: relative;
+      overflow: hidden;
+      padding: 28px;
+      border-radius: 36px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid var(--border);
+      box-shadow: 0 30px 90px rgba(0, 0, 0, .42);
+      backdrop-filter: blur(22px);
+      animation: popIn .9s ease forwards;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,.28), transparent);
+      transform: translateX(-100%);
+      animation: shine 5s infinite;
+      pointer-events: none;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .left, .right {
+      border-radius: 30px;
+      background: rgba(255, 255, 255, .105);
+      border: 1px solid rgba(255,255,255,.2);
+      padding: 28px;
+    }
+
+    .left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 560px;
+    }
+
+    .top-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      padding: 10px 15px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .14);
+      border: 1px solid rgba(255,255,255,.22);
+      color: rgba(255,255,255,.88);
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 22px;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #ff4d8d;
+      box-shadow: 0 0 18px #ff4d8d;
+    }
+
+    h1 {
+      font-size: clamp(38px, 8vw, 82px);
+      line-height: 1.1;
+      letter-spacing: -2px;
+      margin-bottom: 22px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #fff, #ffd1e3, #ff4d8d);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .typing-box {
+      min-height: 120px;
+      margin-bottom: 22px;
+    }
+
+    .typing {
+      font-size: clamp(18px, 2.3vw, 24px);
+      line-height: 1.55;
+      color: rgba(255,255,255,.92);
+      font-weight: 500;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 3px;
+      height: 1.1em;
+      background: #fff;
+      margin-left: 4px;
+      vertical-align: -3px;
+      animation: blink .8s infinite;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 15px 20px;
+      font-size: 15px;
+      font-weight: 800;
+      transition: .25s ease;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+    }
+
+    .main-btn {
+      color: #fff;
+      background: linear-gradient(135deg, #ff4d8d, #ff7ab3);
+      box-shadow: 0 16px 35px rgba(255, 77, 141, .35);
+    }
+
+    .ghost-btn {
+      color: #fff;
+      background: rgba(255,255,255,.13);
+      border: 1px solid rgba(255,255,255,.26);
+    }
+
+    .mini-note {
+      margin-top: 22px;
+      color: rgba(255,255,255,.66);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .right {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .photo-card {
+      position: relative;
+      min-height: 280px;
+      overflow: hidden;
+      border-radius: 28px;
+      /* Background set for the user's photo */
+      background: 
+        linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.5)),
+        url('photo.jpg') center/cover no-repeat,
+        radial-gradient(circle at 30% 25%, rgba(255,255,255,.3), transparent 26%),
+        linear-gradient(135deg, #ff4d8d, #7c3aed);
+      border: 1px solid rgba(255,255,255,.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 22px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+
+    .photo-card::after {
+      content: "Yaya di usia 21 ✨";
+      position: absolute;
+      bottom: 18px;
+      right: 20px;
+      padding: 9px 13px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.28);
+      font-size: 13px;
+      font-weight: 800;
+      backdrop-filter: blur(5px);
+    }
+
+    .vibe-card, .promise-card {
+      border-radius: 26px;
+      padding: 20px;
+      background: rgba(255,255,255,.11);
+      border: 1px solid rgba(255,255,255,.2);
+    }
+
+    .section-title {
+      font-size: 15px;
+      color: rgba(255,255,255,.62);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .vibe-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .vibe-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.1);
+      color: rgba(255,255,255,.9);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .promise-card p {
+      color: rgba(255,255,255,.88);
+      line-height: 1.75;
+      font-size: 15px;
+    }
+
+    .letter {
+      display: none;
+      margin-top: 22px;
+      border-radius: 28px;
+      padding: 24px;
+      background: rgba(255,255,255,.13);
+      border: 1px solid rgba(255,255,255,.24);
+      animation: fadeUp .55s ease forwards;
+    }
+
+    .letter h2 {
+      font-size: clamp(24px, 4vw, 38px);
+      margin-bottom: 14px;
+      letter-spacing: -1px;
+    }
+
+    .letter p {
+      color: rgba(255,255,255,.9);
+      line-height: 1.85;
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+
+    .reasons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .reason {
+      padding: 16px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.18);
+      color: rgba(255,255,255,.9);
+      line-height: 1.55;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%) translateY(120px);
+      z-index: 999;
+      max-width: 92vw;
+      padding: 14px 18px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.26);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 20px 50px rgba(0,0,0,.28);
+      color: #fff;
+      font-weight: 800;
+      transition: .35s ease;
+      text-align: center;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .float {
+      position: fixed;
+      bottom: -40px;
+      pointer-events: none;
+      z-index: 1;
+      animation: floatUp linear forwards;
+      opacity: .85;
+    }
+
+    .confetti {
+      position: fixed;
+      top: -20px;
+      width: 10px;
+      height: 16px;
+      border-radius: 3px;
+      z-index: 100;
+      pointer-events: none;
+      animation: confettiFall linear forwards;
+    }
+
+    /* Modals for Big Heart */
+    .big-heart-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+
+    .big-heart-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .giant-heart-wrapper {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .giant-heart {
+      font-size: 180px;
+      color: #ff4d8d;
+      animation: giantHeartbeat 1.4s infinite ease-in-out;
+      text-shadow: 0 0 60px rgba(255, 77, 141, 0.9);
+      cursor: pointer;
+    }
+
+    @keyframes giantHeartbeat {
+      0%, 100% { transform: scale(1); }
+      15% { transform: scale(1.25); }
+      30% { transform: scale(1); }
+      45% { transform: scale(1.25); }
+      75% { transform: scale(1); }
+    }
+
+    .giant-heart-text {
+      margin-top: 24px;
+      font-size: 28px;
+      font-weight: 900;
+      color: #fff;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s;
+      line-height: 1.4;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+    
+    .giant-heart-subtext {
+      margin-top: 10px;
+      font-size: 16px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.8);
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s;
+    }
+    
+    .big-heart-overlay.active .giant-heart-text,
+    .big-heart-overlay.active .giant-heart-subtext {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .close-modal {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      font-size: 36px;
+      color: rgba(255,255,255,0.6);
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .close-modal:hover {
+      color: #fff;
+    }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(.97) translateY(18px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    @keyframes shine {
+      0%, 55% { transform: translateX(-120%); }
+      72%, 100% { transform: translateX(120%); }
+    }
+
+    @keyframes blink {
+      0%, 45% { opacity: 1; }
+      46%, 100% { opacity: 0; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+      12% { opacity: .9; }
+      100% { transform: translateY(-115vh) rotate(360deg); opacity: 0; }
+    }
+
+    @keyframes confettiFall {
+      to { transform: translateY(115vh) rotate(720deg); opacity: 0; }
+    }
+
+    @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .left {
+        min-height: auto;
+      }
+
+      h1 {
+        letter-spacing: -2.5px;
+      }
+
+      .reasons {
+        grid-template-columns: 1fr;
+      }
+
+      .giant-heart {
+        font-size: 140px;
+      }
+
+      .giant-heart-text {
+        font-size: 22px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .card {
+        padding: 14px;
+        border-radius: 28px;
+      }
+
+      .left, .right {
+        padding: 20px;
+        border-radius: 24px;
+      }
+
+      .photo-card {
+        min-height: 350px;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="noise"></div>
+
+  <main class="wrap">
+    <section class="card">
+      <div class="hero">
+        <div class="left">
+          <div class="top-pill"><span class="dot"></span> hari spesial buat Yaya 🎉</div>
+
+          <h1>
+            Happy 21st Birthday,<br>
+            <span class="gradient-text" id="namaPasangan">Alya Dijayanti</span>
+          </h1>
+
+          <div class="typing-box">
+            <span class="typing" id="typingText"></span><span class="cursor"></span>
+          </div>
+
+          <div class="actions">
+            <button class="main-btn" onclick="openLetter()">Buka surat kecil ini</button>
+            <button class="ghost-btn" onclick="showBigHeart()">Kejutan Buat Yaya ❤️</button>
+          </div>
+
+          <p class="mini-note">
+            Catatan kecil: halaman ini aku buatin spesial buat ngerayain hari lahir kamu yang ke-21. Semoga suka yaa!
+          </p>
+        </div>
+
+        <div class="right">
+          <!-- Foto card with Yaya's photo as background -->
+          <div class="photo-card" id="yayaPhoto">
+          </div>
+
+          <div class="vibe-card">
+            <div class="section-title">Vibes Yaya Hari Ini</div>
+            <div class="vibe-list">
+              <div class="vibe-item"><span>Umur Baru</span><span>21 Tahun 🎂</span></div>
+              <div class="vibe-item"><span>Cantik</span><span>Level Maksimal ✨</span></div>
+              <div class="vibe-item"><span>Cengeng</span><span>Boleh dikit aja 🥺</span></div>
+            </div>
+          </div>
+
+          <div class="promise-card">
+            <div class="section-title">doa kecil buat yaya</div>
+            <p>
+              Semoga Yaya yang selalu berusaha, yang super baik dan cantik ini, selalu dikelilingi hal-hal baik. Jangan gampang nyerah ya!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="letter" id="letter">
+        <h2>Untuk Yaya,</h2>
+        <p>
+          Selamat ulang tahun yang ke-21, Alya Dijayanti. Udah makin dewasa nih! Hari ini bukan cuma tentang umur kamu yang nambah, tapi tentang mensyukuri segala hal baik yang ada di diri kamu.
+        </p>
+        <p>
+          Kamu itu orangnya baik banget, cantik, dan aku salut banget sama kamu yang selalu berusaha ngasih yang terbaik di segala hal. Walaupun kadang kamu masih suka cengeng, nggak apa-apa kok, itu tandanya kamu punya hati yang lembut.
+        </p>
+        <p>
+          Di umur 21 ini, aku berdoa semoga semua yang kamu usahakan berbuah manis, selalu sehat, selalu dilindungi, dan kebahagiaan selalu nemenin langkah kamu.
+        </p>
+        <p>
+          Terus jadi Yaya yang hebat ya. Aku bakal selalu dukung kamu. Happy Birthday! 🎉
+        </p>
+
+        <div class="reasons">
+          <div class="reason">Baik Banget: Selalu peduli sama orang-orang di sekitarmu.</div>
+          <div class="reason">Selalu Berusaha: Nggak gampang nyerah walau kadang jalannya susah.</div>
+          <div class="reason">Cantik & Cengeng: Perpaduan yang bikin kamu unik dan ngangenin. 😆</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast">Happy Birthday Yaya! 💖</div>
+
+  <!-- Big Heart Overlay / Modal -->
+  <div class="big-heart-overlay" id="bigHeartOverlay">
+    <div class="close-modal" onclick="closeBigHeart()">✕</div>
+    <div class="giant-heart-wrapper">
+      <div class="giant-heart" onclick="sendMoreLove()">❤️</div>
+      <div class="giant-heart-text">Aku Sayang Banget Sama Yaya!</div>
+      <div class="giant-heart-subtext">Happy 21st Birthday Sayang 🥰 (Klik hatinya!)</div>
+    </div>
+  </div>
+
+  <script>
+    // Kalimat utama
+    const kalimatUtama = "Selamat ulang tahun yang ke-21! Semoga Yaya yang baik, cantik, selalu berusaha, dan kadang cengeng ini selalu dikelilingi kebahagiaan.";
+
+    let index = 0;
+    const typingText = document.getElementById("typingText");
+
+    function typeWriter() {
+      if (index < kalimatUtama.length) {
+        typingText.textContent += kalimatUtama.charAt(index);
+        index++;
+        setTimeout(typeWriter, 50);
+      }
+    }
+
+    function openLetter() {
+      const letter = document.getElementById("letter");
+      letter.style.display = "block";
+      letter.scrollIntoView({ behavior: "smooth", block: "center" });
+      showToast("Suratnya udah kebuka. Bacanya jangan sambil nangis ya! 🥺");
+      makeConfetti(120);
+    }
+
+    // Fungsi untuk menampilkan Big Heart
+    function showBigHeart() {
+      document.getElementById('bigHeartOverlay').classList.add('active');
+      makeConfetti(200); // Lebih banyak confetti
+      
+      // Mainkan efek suara atau animasi tambahan jika ada
+      showToast("Kejutan spesial buat Yaya!");
+    }
+
+    function closeBigHeart() {
+      document.getElementById('bigHeartOverlay').classList.remove('active');
+    }
+
+    // Fungsi interaktif di dalam big heart
+    function sendMoreLove() {
+      const loveWords = ["❤️", "💖", "🥰", "✨", "Yaya Cantik", "Miss you!", "Happy 21st!"];
+
+      for (let i = 0; i < 20; i++) {
+        setTimeout(() => {
+          const item = document.createElement("div");
+          item.className = "float";
+          item.textContent = loveWords[Math.floor(Math.random() * loveWords.length)];
+          item.style.left = Math.random() * 100 + "vw";
+          item.style.fontSize = Math.random() * 20 + 20 + "px";
+          item.style.animationDuration = Math.random() * 3 + 3 + "s";
+          item.style.zIndex = "10000"; // Supaya di atas overlay
+          document.body.appendChild(item);
+
+          setTimeout(() => item.remove(), 7000);
+        }, i * 100);
+      }
+      
+      // Heartbeat animation get faster
+      const heart = document.querySelector('.giant-heart');
+      heart.style.animationDuration = '0.6s';
+      setTimeout(() => {
+        heart.style.animationDuration = '1.4s';
+      }, 3000);
+    }
+
+    function makeConfetti(total) {
+      const colors = ["#ff4d8d", "#ffffff", "#ffb3d1", "#c084fc", "#f9a8d4", "#fde68a"];
+
+      for (let i = 0; i < total; i++) {
+        const confetti = document.createElement("div");
+        confetti.className = "confetti";
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.animationDuration = Math.random() * 2 + 2.5 + "s";
+        confetti.style.width = Math.random() * 8 + 6 + "px";
+        confetti.style.height = Math.random() * 12 + 10 + "px";
+        
+        // Z-index besar agar tampil saat modal terbuka
+        confetti.style.zIndex = "10001"; 
+        
+        document.body.appendChild(confetti);
+
+        setTimeout(() => confetti.remove(), 5200);
+      }
+    }
+
+    function showToast(text) {
+      const toast = document.getElementById("toast");
+      toast.textContent = text;
+      toast.classList.add("show");
+
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 3000);
+    }
+
+    setInterval(() => {
+      const mini = document.createElement("div");
+      mini.className = "float";
+      mini.textContent = Math.random() > .5 ? "♡" : "✦";
+      mini.style.left = Math.random() * 100 + "vw";
+      mini.style.fontSize = Math.random() * 16 + 12 + "px";
+      mini.style.animationDuration = Math.random() * 4 + 6 + "s";
+      document.body.appendChild(mini);
+
+      setTimeout(() => mini.remove(), 10000);
+    }, 700);
+
+    // Mulai animasi ngetik pas load
+    window.onload = () => {
+      typeWriter();
+    };
+  </script>
+</body>
+</html>
