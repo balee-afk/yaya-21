@@ -63,20 +63,20 @@
       z-index: 0;
     }
 
-    /* Cursor Light Effect */
+    /* Aurora Cursor Light Effect */
     .cursor-light {
       position: fixed;
       top: 0; left: 0;
-      width: 40px;
-      height: 40px;
+      width: 250px;
+      height: 60px;
       border-radius: 50%;
-      background: rgba(255, 77, 141, 0.8);
-      box-shadow: 0 0 60px 30px rgba(255, 77, 141, 0.4), 0 0 100px 60px rgba(255, 77, 141, 0.2);
+      background: linear-gradient(90deg, rgba(255, 77, 141, 0.6), rgba(162, 58, 237, 0.6), rgba(255, 77, 141, 0.6));
+      filter: blur(25px);
       pointer-events: none;
-      transform: translate(-50%, -50%);
+      transform-origin: center;
       z-index: 9999;
-      transition: width 0.2s, height 0.2s;
       mix-blend-mode: screen;
+      transition: opacity 0.3s;
     }
 
     .cursor-dot {
@@ -89,6 +89,62 @@
       pointer-events: none;
       transform: translate(-50%, -50%);
       z-index: 10000;
+    }
+
+    /* Music Player */
+    .music-player {
+      position: fixed;
+      top: 30px;
+      right: 30px;
+      background: rgba(20, 5, 15, 0.6);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      padding: 12px 18px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      z-index: 1000;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    .music-info {
+      display: flex;
+      flex-direction: column;
+      text-align: right;
+    }
+    .music-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: #fff;
+    }
+    .music-artist {
+      font-size: 12px;
+      color: var(--soft-pink);
+      margin-bottom: 3px;
+    }
+    .music-copyright {
+      font-size: 9px;
+      color: rgba(255,255,255,0.4);
+      max-width: 160px;
+      line-height: 1.3;
+    }
+    .play-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink), #d81b60);
+      border: none;
+      color: white;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: none;
+      box-shadow: 0 0 15px rgba(255, 77, 141, 0.4);
+      transition: transform 0.2s;
+    }
+    .play-btn:hover {
+      transform: scale(1.1);
     }
 
     /* Slides Container */
@@ -484,6 +540,7 @@
       .prev-btn { left: 20px; }
       .slide-indicator { bottom: 30px; }
       .card { padding: 24px; }
+      .music-player { top: 15px; right: 15px; padding: 10px; transform: scale(0.9); transform-origin: top right; }
       
       /* disable custom cursor on mobile */
       .cursor-light, .cursor-dot { display: none; }
@@ -493,6 +550,19 @@
 </head>
 <body>
   <div class="noise"></div>
+
+  <div class="music-player">
+    <div class="music-info">
+      <div class="music-title">So High School</div>
+      <div class="music-artist">Taylor Swift</div>
+      <div class="music-copyright">Song is property of Taylor Swift / UMG. No copyright infringement intended.</div>
+    </div>
+    <button id="playPauseBtn" class="play-btn">▶</button>
+    <audio id="bgMusic" loop>
+      <!-- NOTE: You need to put 'so_high_school.mp3' file in the same folder -->
+      <source src="so_high_school.mp3" type="audio/mpeg">
+    </audio>
+  </div>
   
   <div class="cursor-light" id="cursorLight"></div>
   <div class="cursor-dot" id="cursorDot"></div>
@@ -596,10 +666,16 @@
     });
 
     function animateCursor() {
-      lightX += (mouseX - lightX) * 0.15;
-      lightY += (mouseY - lightY) * 0.15;
+      let dx = mouseX - lightX;
+      let dy = mouseY - lightY;
+      lightX += dx * 0.15;
+      lightY += dy * 0.15;
+      
+      let angle = Math.atan2(dy, dx) * 180 / Math.PI;
       cursorLight.style.left = lightX + 'px';
       cursorLight.style.top = lightY + 'px';
+      cursorLight.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+      
       requestAnimationFrame(animateCursor);
     }
     animateCursor();
@@ -741,6 +817,31 @@
 
       setTimeout(() => mini.remove(), 12000);
     }, 800);
+
+    // Music Player Logic
+    const bgMusic = document.getElementById('bgMusic');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    let hasInteracted = false;
+
+    document.body.addEventListener('click', () => {
+      if (!hasInteracted) {
+        bgMusic.play().catch(e => console.log("Audio play blocked"));
+        hasInteracted = true;
+        playPauseBtn.textContent = '⏸';
+      }
+    }, { once: true });
+
+    playPauseBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      hasInteracted = true;
+      if (bgMusic.paused) {
+        bgMusic.play();
+        playPauseBtn.textContent = '⏸';
+      } else {
+        bgMusic.pause();
+        playPauseBtn.textContent = '▶';
+      }
+    });
   </script>
 </body>
 </html>
